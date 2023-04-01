@@ -27,8 +27,6 @@ jobs:
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag_name: ${{ env.VERSION }}
           release_name: Release ${{ env.VERSION }}
@@ -41,8 +39,6 @@ jobs:
 
       - name: Upload Darwin ARM64
         uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: ./packages/release-darwin-arm64-${{ env.VERSION }}.zip
@@ -51,8 +47,6 @@ jobs:
 
       - name: Upload Darwin x86_64
         uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: ./packages/release-darwin-x86_64-${{ env.VERSION }}.zip
@@ -61,8 +55,6 @@ jobs:
 
       - name: Upload Linux ARM64
         uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: ./packages/release-linux-arm64-${{ env.VERSION }}.zip
@@ -71,8 +63,6 @@ jobs:
 
       - name: Upload Linux x86_64
         uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: ./packages/release-linux-x86_64-${{ env.VERSION }}.zip
