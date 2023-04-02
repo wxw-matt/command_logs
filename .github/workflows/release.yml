@@ -14,7 +14,7 @@ jobs:
           echo "VERSION=$(cat .version)" >> $GITHUB_ENV
       - name: Show version
         run: |
-          echo "${{ GITHUB_REF_NAME }}"
+          echo "${{ env.GITHUB_REF_NAME }}"
       - name: Set up Go
         if: startsWith(github.ref, 'refs/tags/')
         uses: actions/setup-go@v4.0.0
@@ -28,7 +28,7 @@ jobs:
         run: ./build_all.sh
       - name: Package
         if: startsWith(github.ref, 'refs/tags/')
-        run: ./scripts/pack.sh ${{ GITHUB_REF_NAME }}
+        run: ./scripts/pack.sh ${{ env.GITHUB_REF_NAME }}
       - name: Show files
         run: find .
       - name: Create Release
@@ -38,8 +38,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ GITHUB_REF_NAME }}
-          release_name: Release ${{ GITHUB_REF_NAME }}
+          tag_name: ${{ env.GITHUB_REF_NAME }}
+          release_name: Release ${{ env.GITHUB_REF_NAME }}
           body: |
             This is the release:
             - Log commands executed in Bash and ZSH
@@ -52,7 +52,7 @@ jobs:
         if: startsWith(github.ref, 'refs/tags/')
         with:
           files: |
-            ./packages/release-darwin-arm64-${{ GITHUB_REF_NAME }}.zip
-            ./packages/release-darwin-x86_64-${{ GITHUB_REF_NAME }}.zip
-            ./packages/release-linux-arm64-${{ GITHUB_REF_NAME }}.zip
-            ./packages/release-linux-x86_64-${{ GITHUB_REF_NAME }}.zip
+            ./packages/release-darwin-arm64-${{ env.GITHUB_REF_NAME }}.zip
+            ./packages/release-darwin-x86_64-${{ env.GITHUB_REF_NAME }}.zip
+            ./packages/release-linux-arm64-${{ env.GITHUB_REF_NAME }}.zip
+            ./packages/release-linux-x86_64-${{ env.GITHUB_REF_NAME }}.zip
