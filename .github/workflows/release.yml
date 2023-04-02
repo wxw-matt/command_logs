@@ -14,7 +14,7 @@ jobs:
           echo "VERSION=$(cat .version)" >> $GITHUB_ENV
       - name: Show version
         run: |
-          echo "${{ env.GITHUB_REF_NAME }}"
+          echo "${{ github.ref_name }}"
       - name: Set up Go
         if: startsWith(github.ref, 'refs/tags/')
         uses: actions/setup-go@v4.0.0
@@ -28,7 +28,7 @@ jobs:
         run: ./build_all.sh
       - name: Package
         if: startsWith(github.ref, 'refs/tags/')
-        run: ./scripts/pack.sh "${{ env.GITHUB_REF_NAME }}"
+        run: ./scripts/pack.sh "${{ github.ref_name }}"
       - name: Show files
         run: find .
       - name: Create Release
@@ -38,10 +38,10 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ env.GITHUB_REF_NAME }}
-          release_name: Release ${{ env.GITHUB_REF_NAME }}
+          tag_name: ${{ github.ref_name }}
+          release_name: Release ${{ github.ref_name }}
           body: |
-            This is the release:
+            This is the first release:
             - Log commands executed in Bash and ZSH
             - Save the logs to DynamoDB through the AWS Lambda Function
           draft: false
@@ -52,7 +52,7 @@ jobs:
         if: startsWith(github.ref, 'refs/tags/')
         with:
           files: |
-            ./packages/release-darwin-arm64-${{ env.GITHUB_REF_NAME }}.zip
-            ./packages/release-darwin-x86_64-${{ env.GITHUB_REF_NAME }}.zip
-            ./packages/release-linux-arm64-${{ env.GITHUB_REF_NAME }}.zip
-            ./packages/release-linux-x86_64-${{ env.GITHUB_REF_NAME }}.zip
+            ./packages/release-darwin-arm64-${{ github.ref_name }}.zip
+            ./packages/release-darwin-x86_64-${{ github.ref_name }}.zip
+            ./packages/release-linux-arm64-${{ github.ref_name }}.zip
+            ./packages/release-linux-x86_64-${{ github.ref_name }}.zip
