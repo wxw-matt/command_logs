@@ -1,0 +1,52 @@
+name: Build and Release Manually
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set version
+        run: |
+          echo "VERSION=$(cat .version)" >> $GITHUB_ENV
+      - name: Show version
+        run: |
+          echo "${{ env.VERSION }}"
+      - name: Set up Go
+        uses: actions/setup-go@v4.0.0
+        with:
+          go-version: 1.17
+      - name: Go get packages
+        run: go get
+      - name: Build
+        run: ./build_all.sh
+      - name: Package
+        run: ./scripts/pack.sh
+      - name: Show files
+        run: find .
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ env.VERSION }}
+          release_name: Release ${{ env.VERSION }}
+          body: |
+            This is the release:
+            - Log commands executed in Bash and ZSH
+            - Save the logs to DynamoDB through the AWS Lambda Function
+          draft: false
+          prerelease: false
+
+      - name: Upload Assets
+        uses: softprops/action-gh-release@v1
+        with:
+          files: |
+            ./packages/release-darwin-arm64-${{ env.VERSION }}.zip
+            ./packages/release-darwin-x86_64-${{ env.VERSION }}.zip
+            ./packages/release-linux-arm64-${{ env.VERSION }}.zip
+            ./packages/release-linux-x86_64-${{ env.VERSION }}.zip
