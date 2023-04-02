@@ -28,7 +28,7 @@ jobs:
         run: ./build_all.sh
       - name: Package
         if: startsWith(github.ref, 'refs/tags/')
-        run: ./scripts/pack.sh ${{ env.GITHUB_REF_NAME }}
+        run: ./scripts/pack.sh "${{ env.GITHUB_REF_NAME }}"
       - name: Show files
         run: find .
       - name: Create Release

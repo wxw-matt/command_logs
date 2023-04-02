@@ -8,6 +8,7 @@ cp -rf bin/* releases/bin/
 cp -rf scripts/* releases/scripts/
 
 version=$1
+echo $version
 platforms="linux darwin"
 architectures="x86_64 arm64"
 for platform in $platforms; do
