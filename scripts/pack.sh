@@ -7,7 +7,7 @@ mkdir -p releases/scripts
 cp -rf bin/* releases/bin/
 cp -rf scripts/* releases/scripts/
 
-version=$(cat .version)
+version=$1
 platforms="linux darwin"
 architectures="x86_64 arm64"
 for platform in $platforms; do
