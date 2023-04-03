@@ -7,11 +7,11 @@ function __cl_locate_file() {
     # Search in ./bin
     if [ -d "./bin" ]; then
         file_path=$(find "./bin" -name $filename -type f -print -quit)
-        file_path="$(pwd)/$file_path"
+        file_path="$(pwd)/$filename"
     fi
 
     # Search in $HOME/.cache/command_logs/
-    if [ -z "$file_path" ] && [ -d "$HOME/.cache/command_logs/" ]; then
+    if [ ! -f "$file_path" ] && [ -d "$HOME/.cache/command_logs/" ]; then
         file_path=$(find "$HOME/.cache/command_logs/" -name $filename -type f -print -quit)
     fi
 
@@ -41,10 +41,11 @@ function __cl_ask_and_save_api_key_and_url() {
         return 0
     fi
 
-    echo "Please enter your AWS API Key: (See the page of the trigger settings for the lambda function)"
+    echo "To find the values for the following quesions, please see the page of the trigger settings for the lambda function"
+    printf "Please enter your AWS API Key: "
     read api_key
 
-    echo "Please enter the AWS Lambda Function URL: "
+    printf "Please enter the AWS Lambda Function URL: "
     read lambda_url
 
     # Create directory if it does not exist
@@ -119,4 +120,3 @@ function __cl_send_command() {
 function cl_send_bye_command() {
     __cl_send_command "bye"
 }
-

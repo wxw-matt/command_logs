@@ -1,6 +1,12 @@
-name: Build and Release Manually
+name: Build and Release
+# https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions
 on:
   workflow_dispatch:
+  push:
+    branches-ignore:
+      - 'main'
+    tags:
+      - "*"
 
 permissions:
   contents: write
