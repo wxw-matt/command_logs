@@ -21,12 +21,15 @@ __cl_log_dir="$HOME/.cache/command_logs"
 mkdir -p ${__cl_log_dir}
 
 command_logs=$(__cl_get_file_name command_logs)
-send_to_unix_socket=$(__cl_get_file_name command_logs)
+send_to_unix_socket=$(__cl_get_file_name send_to_unix_socket)
+
+echo "Stopping processes ..."
+bin/$send_to_unix_socket /tmp/command_logs.sock bye > /dev/null
 
 echo "Installing $command_logs"
 cp "bin/$command_logs" $__cl_log_dir/
 echo "Installing $send_to_unix_socket"
-cp "bin/$(__cl_get_file_name send_to_unix_socket)" $__cl_log_dir/
+cp "bin/$send_to_unix_socket" $__cl_log_dir/
 
 echo "Installing ${SHELL_NAME} script"
 cp "scripts/common.sh" $__cl_log_dir/
