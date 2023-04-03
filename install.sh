@@ -9,7 +9,7 @@ fi
 
 platform=$(uname | tr '[:upper:]' '[:lower:]')
 arch=$(uname -m)
-filename=release-$platform-$arch-$tag_name.zip
+filename=release-$platform-$arch-$tag_name.tar.gz
 fileurl=https://github.com/wxw-matt/command_logs/releases/download/$tag_name/$filename
 
 curl -sSL $fileurl -o /tmp/$filename
