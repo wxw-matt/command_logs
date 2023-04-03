@@ -19,4 +19,4 @@ tar xf /tmp/$filename
 rm /tmp/$filename
 cd /tmp/command_logs_tmp/releases
 ./scripts/install.sh
-source $HOME/.cache/command_logs/bash.sh
+source $HOME/.cache/command_logs/$(basename "$SHELL").sh
