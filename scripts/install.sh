@@ -23,8 +23,8 @@ mkdir -p ${__cl_log_dir}
 command_logs=$(__cl_get_file_name command_logs)
 send_to_unix_socket=$(__cl_get_file_name send_to_unix_socket)
 
-echo "Stopping processes ..."
-bin/$send_to_unix_socket /tmp/command_logs.sock bye > /dev/null
+echo "Stopping process ..."
+echo "bye" | bin/$send_to_unix_socket /tmp/command_logs.sock > /dev/null
 
 echo "Installing $command_logs"
 cp "bin/$command_logs" $__cl_log_dir/
