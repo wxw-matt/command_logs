@@ -14,7 +14,8 @@ fileurl=https://github.com/wxw-matt/command_logs/releases/download/$tag_name/$fi
 
 curl -sSL $fileurl -o /tmp/$filename
 mkdir -p /tmp/command_logs_tmp
-tar xf /tmp/$filename /tmp/command_logs_tmp
+cd /tmp/command_logs_tmp
+tar xf /tmp/$filename
 rm /tmp/$filename
 cd /tmp/command_logs_tmp/releases
 ./scripts/install.sh
