@@ -1,6 +1,6 @@
 #!/bin/bash
 
-tag_name=$(curl --silent "https://api.github.com/repos/wxw-matt/command_logs/releases/latest" |  grep -Po '"tag_name": "\K.*?(?=")')
+tag_name=$(curl --silent "https://api.github.com/repos/wxw-matt/command_logs/releases/latest" | grep -o '"tag_name": ".*"' | cut -d '"' -f 4)
 
 # Get the tag name from the first argument if provided
 if [[ $# -ge 1 ]]; then
