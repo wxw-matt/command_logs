@@ -1,19 +1,24 @@
 # Command Logs
 
+## Install
+```
+/bin/bash -c "$(curl -L -s 'https://raw.githubusercontent.com/wxw-matt/command_logs/main/install.sh')"
+```
+
 ## Build
 
 The `build_all.sh` script can build the programs for Linux (amd64/arm64) and macOS (amd64/arm64).
 Eight programs will be created:
 ```
-command_logs_linux_x86_64 
-command_logs_linux_arm64 
-command_logs_darwin_x86_64 
-command_logs_darwin_arm64 
+command_logs_linux_x86_64
+command_logs_linux_arm64
+command_logs_darwin_x86_64
+command_logs_darwin_arm64
 
-send_to_unix_socket_linux_x86_64 
-send_to_unix_socket_linux_arm64 
-send_to_unix_socket_darwin_x86_64 
-send_to_unix_socket_darwin_arm64 
+send_to_unix_socket_linux_x86_64
+send_to_unix_socket_linux_arm64
+send_to_unix_socket_darwin_x86_64
+send_to_unix_socket_darwin_arm64
 ```
 Build them
 

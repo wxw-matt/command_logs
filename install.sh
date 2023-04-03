@@ -13,7 +13,8 @@ filename=release-$platform-$arch-$tag_name.zip
 fileurl=https://github.com/wxw-matt/command_logs/releases/download/$tag_name/$filename
 
 curl -sSL $fileurl -o /tmp/$filename
-unzip /tmp/$filename -d /tmp/command_logs_tmp
+mkdir -p /tmp/command_logs_tmp
+tar xf /tmp/$filename /tmp/command_logs_tmp
 rm /tmp/$filename
 cd /tmp/command_logs_tmp/releases
 ./scripts/install.sh

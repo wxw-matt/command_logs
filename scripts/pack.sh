@@ -13,6 +13,6 @@ platforms="linux darwin"
 architectures="x86_64 arm64"
 for platform in $platforms; do
   for arch in $architectures; do
-    zip packages/"release-$platform-$arch-$version.zip" releases/bin/*${platform}_${arch}* releases/scripts/*
+    tar czf packages/"release-$platform-$arch-$version.tar.gz" releases/bin/*${platform}_${arch}* releases/scripts/*
   done
 done
