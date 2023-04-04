@@ -1,4 +1,4 @@
-#!/bin/bash
+. scripts/platform.sh
 
 tag_name=$(curl --silent "https://api.github.com/repos/wxw-matt/command_logs/releases/latest" | grep -o '"tag_name": ".*"' | cut -d '"' -f 4)
 
@@ -7,8 +7,8 @@ if [[ $# -ge 1 ]]; then
   tag_name="$1"
 fi
 
-platform=$(uname | tr '[:upper:]' '[:lower:]')
-arch=$(uname -m)
+platform=$(get_platform)
+arch=$(get_arch)
 filename=release-$platform-$arch-$tag_name.tar.gz
 fileurl=https://github.com/wxw-matt/command_logs/releases/download/$tag_name/$filename
 

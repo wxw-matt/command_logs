@@ -1,13 +1,15 @@
-#!/bin/sh
+# . scripts/platform.sh
+
+__cl_platform=$(get_platform)
+__cl_arch=$(get_arch)
 
 function __cl_locate_file() {
     local filename=$1
     local file_path=""
 
     # Search in ./bin
-    if [ -d "./bin" ]; then
-        file_path=$(find "./bin" -name $filename -type f -print -quit)
-        file_path="$(pwd)/$filename"
+    if [ -d "$(pwd)/bin" ]; then
+        file_path=$(find "$(pwd)/bin" -name $filename -type f -print -quit)
     fi
 
     # Search in $HOME/.cache/command_logs/
@@ -23,16 +25,12 @@ function __cl_locate_file() {
 }
 
 function __cl_get_command_logs() {
-    local platform=$(uname | tr '[:upper:]' '[:lower:]')
-    local arch=$(uname -m)
-    local file=$(__cl_locate_file "command_logs_${platform}_${arch}")
+    local file=$(__cl_locate_file "command_logs_${__cl_platform}_${__cl_arch}")
     echo $file
 }
 
 function __cl_get_send_to_unix_socket() {
-    local platform=$(uname | tr '[:upper:]' '[:lower:]')
-    local arch=$(uname -m)
-    local file=$(__cl_locate_file "send_to_unix_socket_${platform}_${arch}")
+    local file=$(__cl_locate_file "send_to_unix_socket_${__cl_platform}_${__cl_arch}")
     echo $file
 }
 

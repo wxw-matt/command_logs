@@ -1,18 +1,20 @@
-SHELL_NAME=$(basename "$SHELL")
+. scripts/platform.sh
+__cl_platform=$(get_platform)
+__cl_arch=$(get_arch)
+__cl_shell_name=$(get_shell)
+
 function __cl_get_file_name() {
-    local platform=$(uname | tr '[:upper:]' '[:lower:]')
-    local arch=$(uname -m)
-    local file="$1_${platform}_${arch}"
+    local file="$1_${__cl_platform}_${__cl_arch}"
     echo $file
 }
 
 function add_shell_line() {
-    if grep -Fxq "source \$HOME/.cache/command_logs/${SHELL_NAME}.sh" ~/.${SHELL_NAME}rc
+    if grep -Fxq "source \$HOME/.cache/command_logs/${__cl_shell_name}.sh" ~/.${__cl_shell_name}rc
     then
-        echo "Command_logs script has been installed in .${SHELL_NAME}rc. Nothing to do."
+        echo "Command_logs script has been installed in .${__cl_shell_name}rc. Nothing to do."
     else
-        echo "Adding line to .${SHELL_NAME}rc..."
-        echo "source \$HOME/.cache/command_logs/${SHELL_NAME}.sh" >> ~/.${SHELL_NAME}rc
+        echo "Adding line to .${__cl_shell_name}rc..."
+        echo "source \$HOME/.cache/command_logs/${__cl_shell_name}.sh" >> ~/.${__cl_shell_name}rc
     fi
 }
 
@@ -31,8 +33,9 @@ cp "bin/$command_logs" $__cl_log_dir/
 echo "Installing $send_to_unix_socket"
 cp "bin/$send_to_unix_socket" $__cl_log_dir/
 
-echo "Installing ${SHELL_NAME} script"
+echo "Installing ${__cl_shell_name} script"
+cp "scripts/platform.sh" $__cl_log_dir/
 cp "scripts/common.sh" $__cl_log_dir/
-cp "scripts/${SHELL_NAME}.sh" $__cl_log_dir/
+cp "scripts/${__cl_shell_name}.sh" $__cl_log_dir/
 
-add_shell_line $SHELL_NAME
+add_shell_line $__cl_shell_name
