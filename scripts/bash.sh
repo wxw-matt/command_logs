@@ -2,8 +2,20 @@ __cl_log_dir="$HOME/.cache/command_logs"
 __cl_log_file="$__cl_log_dir/cmds.log"
 __cl_err_log_file="$__cl_log_dir/errors.log"
 __cl_env_file="$HOME/.cache/command_logs/cmd_logs_env.sh"
+__cl_common_path="$__cl_log_dir/common.sh"
+__cl_platform_path="$__cl_log_dir/platform.sh"
 
-. "${__cl_log_dir}/common.sh"
+if [ -f "$__cl_platform_path" ]; then
+    . $__cl_platform_path
+else
+    . scripts/platform.sh
+fi
+
+if [ -f "$__cl_common_path" ]; then
+    . $__cl_common_path
+else
+    . scripts/common.sh
+fi
 
 function _bash_command_logs_last_command() {
     history 1 | awk '{$1=""; print $0}' | sed -e 's/^[[:space:]]*//'
