@@ -29,6 +29,25 @@ get_arch() {
   esac
 }
 
+get_shell() {
+  if [ "$(get_platform)" = "macos" ]; then
+    shell="$(dscl . -read /Users/$USER UserShell)"
+  else
+    shell="$(grep "^$(id -un):" /etc/passwd | awk -F: '{print $7}')"
+  fi
+  case "${shell}" in
+    *zsh)
+      echo "zsh"
+      ;;
+    *bash)
+      echo "bash"
+      ;;
+    *)
+      echo "$shell"
+      ;;
+  esac
+}
+
 tag_name=$(curl --silent "https://api.github.com/repos/wxw-matt/command_logs/releases/latest" | grep -o '"tag_name": ".*"' | cut -d '"' -f 4)
 
 # Get the tag name from the first argument if provided
@@ -48,4 +67,4 @@ tar xf /tmp/$filename
 rm /tmp/$filename
 cd /tmp/command_logs_tmp/releases
 ./scripts/install.sh
-source $HOME/.cache/command_logs/$(basename "$SHELL").sh
+source $HOME/.cache/command_logs/$(basename "$(get_shell)").sh
