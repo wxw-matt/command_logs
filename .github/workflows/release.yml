@@ -13,9 +13,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Set version
-        run: |
-          echo "VERSION=$(cat .version)" >> $GITHUB_ENV
       - name: Show version
         run: |
           echo "${{ github.ref_name }}"
@@ -55,6 +52,10 @@ jobs:
         uses: softprops/action-gh-release@v1
         if: startsWith(github.ref, 'refs/tags/') || github.ref_name == 'main'
         with:
+          body: |
+            This is the first release:
+            - Log commands executed in Bash and Zsh
+            - Save the logs to DynamoDB through the AWS Lambda Function
           files: |
             ./packages/release-macos-arm64-${{ github.ref_name }}.tar.gz
             ./packages/release-macos-amd64-${{ github.ref_name }}.tar.gz
