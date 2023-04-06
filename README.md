@@ -1,8 +1,15 @@
 # Command Logs
 
 ## Install
+
+### For Bash
 ```
 /bin/bash -c "$(curl -L -s 'https://raw.githubusercontent.com/wxw-matt/command_logs/main/install.sh')"
+```
+
+### For Zsh
+```
+/bin/zsh -c "$(curl -L -s 'https://raw.githubusercontent.com/wxw-matt/command_logs/main/install.sh')"
 ```
 
 ## Build

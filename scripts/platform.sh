@@ -33,7 +33,7 @@ get_shell() {
   if [ "$(get_platform)" = "macos" ]; then
     shell="$(dscl . -read /Users/$USER UserShell)"
   else
-    shell="$SHELL"
+    shell="$(grep "^$(id -un):" /etc/passwd | awk -F: '{print $7}')"
   fi
   case "${shell}" in
     *zsh)
