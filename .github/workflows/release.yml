@@ -32,21 +32,6 @@ jobs:
         run: ./scripts/pack.sh "${{ github.ref_name }}"
       - name: Show files
         run: find .
-      - name: Create Release
-        id: create_release
-        uses: actions/create-release@v1
-        if: startsWith(github.ref, 'refs/tags/') || github.ref_name == 'main'
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: ${{ github.ref_name }}
-          release_name: Release ${{ github.ref_name }}
-          body: |
-            This is the first release:
-            - Log commands executed in Bash and ZSH
-            - Save the logs to DynamoDB through the AWS Lambda Function
-          draft: false
-          prerelease: false
 
       - name: Upload Assets
         uses: softprops/action-gh-release@v1
