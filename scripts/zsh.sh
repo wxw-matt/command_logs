@@ -1,11 +1,11 @@
 #!/bin/zsh
 
-local __cl_log_dir="$HOME/.cache/command_logs"
-local __cl_log_file="$__cl_log_dir/cmds.log"
-local __cl_err_log_file="$__cl_log_dir/errors.log"
-local __cl_env_file="$HOME/.cache/command_logs/cmd_logs_env.sh"
-local __cl_common_path="$__cl_log_dir/common.sh"
-local __cl_platform_path="$__cl_log_dir/platform.sh"
+__cl_log_dir="$HOME/.cache/command_logs"
+__cl_log_file="$__cl_log_dir/cmds.log"
+__cl_err_log_file="$__cl_log_dir/errors.log"
+__cl_env_file="$HOME/.cache/command_logs/cmd_logs_env.sh"
+__cl_common_path="$__cl_log_dir/common.sh"
+__cl_platform_path="$__cl_log_dir/platform.sh"
 
 if [ -f "$__cl_platform_path" ]; then
     . $__cl_platform_path
