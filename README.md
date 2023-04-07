@@ -2,15 +2,11 @@
 
 ## Install
 
-### For Bash
 ```
 /bin/bash -c "$(curl -L -s 'https://raw.githubusercontent.com/wxw-matt/command_logs/main/install.sh')"
 ```
-
-### For Zsh
-```
-/bin/zsh -c "$(curl -L -s 'https://raw.githubusercontent.com/wxw-matt/command_logs/main/install.sh')"
-```
+Note:
+> The command above is for the installation on both Bash and Zsh. As the users have to use `source` to load the script in any way, or start a terminal.
 
 ## Build
 
