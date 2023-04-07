@@ -3,12 +3,12 @@ __cl_platform=$(get_platform)
 __cl_arch=$(get_arch)
 __cl_shell_name=$(get_shell)
 
-function __cl_get_file_name() {
+__cl_get_file_name() {
     local file="$1_${__cl_platform}_${__cl_arch}"
     echo $file
 }
 
-function add_shell_line() {
+__cl_add_shell_line() {
     if grep -Fxq "source \$HOME/.cache/command_logs/${__cl_shell_name}.sh" ~/.${__cl_shell_name}rc
     then
         echo "Command_logs script has been installed in .${__cl_shell_name}rc. Nothing to do."
@@ -38,4 +38,4 @@ cp "scripts/platform.sh" $__cl_log_dir/
 cp "scripts/common.sh" $__cl_log_dir/
 cp "scripts/${__cl_shell_name}.sh" $__cl_log_dir/
 
-add_shell_line $__cl_shell_name
+__cl_add_shell_line $__cl_shell_name
