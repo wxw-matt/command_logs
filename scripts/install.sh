@@ -1,4 +1,5 @@
 . scripts/platform.sh
+. scripts/common.sh
 __cl_platform=$(get_platform)
 __cl_arch=$(get_arch)
 __cl_shell_name=$(get_shell)
@@ -37,5 +38,5 @@ echo "Installing ${__cl_shell_name} script"
 cp "scripts/platform.sh" $__cl_log_dir/
 cp "scripts/common.sh" $__cl_log_dir/
 cp "scripts/${__cl_shell_name}.sh" $__cl_log_dir/
-
 __cl_add_shell_line $__cl_shell_name
+__cl_ask_and_save_api_key_and_url

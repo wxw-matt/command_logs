@@ -1,0 +1,2 @@
+* Ask for AWS Lambda configuratoin during the installation
+* Verify the Lambda configuration by accessing the `/hello` endpoint

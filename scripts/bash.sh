@@ -37,6 +37,5 @@ if [[ "$PROMPT_COMMAND" != *"_command_logs_hook"* ]]; then
     touch ${__cl_log_file}
     touch ${__cl_err_log_file}
     PROMPT_COMMAND="_command_logs_hook;${PROMPT_COMMAND:+$PROMPT_COMMAND;}"
-    __cl_ask_and_save_api_key_and_url
     __cl_run_command_logs_background
 fi
